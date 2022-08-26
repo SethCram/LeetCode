@@ -1,10 +1,10 @@
 class Solution:
     def search(self, nums: list[int], target: int) -> int:
-        """Non recursive quick sort.
+        """Non recursive 'interval' (binary?) search. Requires data set in ascending order.
 
         Args:
-            nums (list[int]): _description_
-            target (int): _description_
+            nums (list[int]): Requires data set in ascending order.
+            target (int): Nubmer looking for
 
         Returns:
             int: _description_
