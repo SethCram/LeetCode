@@ -12,7 +12,7 @@ namespace LeetCode
             //Console.WriteLine( findIntToRoman.IntToRoman(3) );
 
             SortedArrSqrs sortedArrSqrs = new SortedArrSqrs();
-            int[] intArr = {-4,-1,0,3,10};
+            int[] intArr = {-10000,-9999,-7,-5,0,0,10000};
             sortedArrSqrs.SortedSquares( nums: intArr );
         }
 

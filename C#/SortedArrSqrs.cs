@@ -17,28 +17,18 @@ namespace LeetCode
             int[] sqrdArr = new int[incomingArrLen];
 
             //declare a new lists
-            List<int> unorderedList = new List<int>();
-            List<int> replaceNumberList = new List<int>();
+            List<int> negativeList = new List<int>();
 
-            int phNumber;
             int currNumber;
             int sqrdArrIndex = 0;
-            int unorderedListIndex = 0;
-            int unorderedCurrNumber;
-            int replaceNumberListIndex = 0;
-            int insertionVal;
-            int replacementCurrNumber;
+            int negativeListIndex = 0;
+            int negativeListCurrNumber;
+            int numsIndex = 0;
 
-            bool unorderedListUseable = false;
-            bool replaceNumberListUseable = false;
+            bool negativeListUseable = false;
+            bool numsArrUseable = false;
 
-            int unorderedCount;//= 0; //shouldn't need initing?
-            int replaceCount;
-
-            //bool unorderedNull;
-            //bool replaceNull;
-
-            //Possible sorts: Quick Sort, Bubble Sort
+            int negativeListCount;
 
             //if highest # is zero or negative
             if(nums[incomingArrLen-1] <= 0)
@@ -54,176 +44,89 @@ namespace LeetCode
                 return sqrdArr;
             }
 
-            //walk thru incoming arr that's in non-decr order (and has positives in it)
-            for(int i = 0; i < incomingArrLen; i++)
+            //cache useability
+            numsArrUseable = numsIndex < incomingArrLen;
+
+            //cache count and useability
+            negativeListCount = negativeList.Count();
+            negativeListUseable = negativeListCount > 0 && negativeListIndex < negativeListCount;
+
+            //loop till arr + list no longer useable
+            while( numsArrUseable || negativeListUseable )
             {
+
                 //cache curr # for ops
-                currNumber = nums[i];
+                currNumber = nums[numsIndex];
 
                 //if curr number negative
                 if( currNumber < 0 )
                 {
-                    //add to end of unordered list once turned positive
-                    unorderedList.Add(-1 * currNumber);
+                    //add to end of negativeList list once turned positive
+                    negativeList.Add(-1 * currNumber);
+
+                    numsIndex++;
                 }
                 //if curr # positive
                 else
                 {
-                    //cache count and useability of each list
-
-                    unorderedCount = unorderedList.Count();
-                    unorderedListUseable = unorderedCount > 0 && unorderedListIndex < unorderedCount;
-
-                    replaceCount = replaceNumberList.Count();
-                    replaceNumberListUseable = replaceCount > 0 && replaceNumberListIndex < replaceCount;
-                    
                     //insert val
 
-                    //if both lists useable
-                    if( unorderedListUseable && replaceNumberListUseable)
+                    //if list + arr useable
+                    if( negativeListUseable && numsArrUseable)
                     {
-                        //cache curr replacement val
-                        replacementCurrNumber = replaceNumberList[replaceNumberListIndex];
-                        //cache curr unordered list val
-                        unorderedCurrNumber = unorderedList[unorderedCount-1-unorderedListIndex];
+                        negativeListCurrNumber = negativeList[negativeListCount-1-negativeListIndex];
 
-                        //if replacement list has a lower or equal val 
-                        if( unorderedCurrNumber >= replacementCurrNumber )
+                        //if curr num has a lower or equal val 
+                        if( negativeListCurrNumber >= currNumber )
                         {
-                            //if curr number is greater than the insertion val
-                            if( currNumber > replacementCurrNumber )
-                            {
-                                //add replaced number to the replacement list
-                                replaceNumberList.Add( currNumber );
-
-                                //fill in the squared arr bc insertion val decided accordingly
-                                sqrdArr[sqrdArrIndex] = replacementCurrNumber * replacementCurrNumber;
-                                sqrdArrIndex++;
-
-                                replaceNumberListIndex++; //(should only incr index w/ inserted)
-                            }
-                            //if curr number is less than or equal to insertion val
-                            else
-                            {
-                                //fill in the squared arr
-                                sqrdArr[sqrdArrIndex] = currNumber * currNumber;
-                                sqrdArrIndex++;
-                            }
-                        }
-                        //if unordered list has a lower val
-                        else
-                        {
-
-                            if( currNumber > unorderedCurrNumber )
-                            {
-                                //add replaced number to the replacement list
-                                replaceNumberList.Add( currNumber );
-
-                                //fill in the squared arr bc insertion val decided accordingly
-                                sqrdArr[sqrdArrIndex] = unorderedCurrNumber * unorderedCurrNumber;
-                                sqrdArrIndex++;
-
-                                unorderedListIndex++; //(should only incr index w/ inserted)
-                            }
-                            //if curr number is less than or equal to insertion val
-                            else
-                            {
-                                //fill in the squared arr
-                                sqrdArr[sqrdArrIndex] = unorderedCurrNumber * unorderedCurrNumber;
-                                sqrdArrIndex++;
-                            }
-                        }
-                    }
-                    //if unordered list useable
-                    else if( unorderedListUseable )
-                    {
-                        //cache curr unordered list val
-                        unorderedCurrNumber = unorderedList[unorderedCount-1-unorderedListIndex];
-
-                        if( currNumber > unorderedCurrNumber )
-                        {
-                            //add replaced number to the replacement list
-                            replaceNumberList.Add( currNumber );
-
-                            //fill in the squared arr bc insertion val decided accordingly
-                            sqrdArr[sqrdArrIndex] = unorderedCurrNumber * unorderedCurrNumber;
-                            sqrdArrIndex++;
-
-                            unorderedListIndex++; //(should only incr index w/ inserted)
-                        }
-                        //if curr number is less than or equal to insertion val
-                        else
-                        {
-                            //fill in the squared arr
-                            sqrdArr[sqrdArrIndex] = unorderedCurrNumber * unorderedCurrNumber;
-                            sqrdArrIndex++;
-                        }
-                    }
-                    //if replace # list useable
-                    else if( replaceNumberListUseable )
-                    {
-                        //cache curr replacement val
-                        replacementCurrNumber = replaceNumberList[replaceNumberListIndex];
-
-                        if( currNumber > replacementCurrNumber )
-                        {
-                            //add replaced number to the replacement list
-                            replaceNumberList.Add( currNumber );
-
-                            //fill in the squared arr bc insertion val decided accordingly
-                            sqrdArr[sqrdArrIndex] = replacementCurrNumber * replacementCurrNumber;
-                            sqrdArrIndex++;
-
-                            replaceNumberListIndex++; //(should only incr index w/ inserted)
-                        }
-                        //if curr number is less than or equal to insertion val
-                        else
-                        {
-                            //fill in the squared arr
+                            //fill in the squared arr w/ curr num
                             sqrdArr[sqrdArrIndex] = currNumber * currNumber;
                             sqrdArrIndex++;
+
+                            numsIndex++;
+                        }
+                        //if negativeList list has a lower val
+                        else
+                        {
+                            //fill in the squared arr bc insertion val decided accordingly
+                            sqrdArr[sqrdArrIndex] = negativeListCurrNumber * negativeListCurrNumber;
+                            sqrdArrIndex++;
+
+                            negativeListIndex++; //(should only incr index w/ inserted)
                         }
                     }
-                    //if neither list useable for number insertions
-                    else
+                    //if only curr nums arr useable
+                    else if( numsArrUseable )
                     {
-                        //we're done so break out of loop
-                        break;
+                        //fill in the squared arr w/ curr num
+                        sqrdArr[sqrdArrIndex] = currNumber * currNumber;
+                        sqrdArrIndex++;
+
+                        numsIndex++;
+                    }
+                    //if only negativeList list useable
+                    else if( negativeListUseable )
+                    {
+                        negativeListCurrNumber = negativeList[negativeListCount-1-negativeListIndex];
+
+                        //fill in the squared arr bc insertion val decided accordingly
+                        sqrdArr[sqrdArrIndex] = negativeListCurrNumber * negativeListCurrNumber;
+                        sqrdArrIndex++;
+
+                        negativeListIndex++; //(should only incr index w/ inserted)
                     }
                 }
-            }
+
+                //cache useability
+                numsArrUseable = numsIndex < incomingArrLen;
+
+                //cache count and useability
+                negativeListCount = negativeList.Count();
+                negativeListUseable = negativeListCount > 0 && negativeListIndex < negativeListCount;
+
+            } 
 
             return sqrdArr;
         }
-
-        /*
-        private void something(int currNumber, int insertionVal)
-        {
-            //if curr number is greater than the insertion val
-            if( currNumber > insertionVal )
-            {
-                //add replaced number to the replacement list
-                replaceNumberList.Add( currNumber );
-                
-                //replace num w/ insertion number
-                //nums[i] = insertionVal;
-
-                //place inserted val into the og arr
-                //nums[shiftIndex] = insertionVal;
-                //shiftIndex++;
-
-                //fill in the squared arr bc insertion val decided accordingly
-                sqrdArr[sqrdArrIndex] = insertionVal * insertionVal;
-                sqrdArrIndex++;
-            }
-            //if curr number is less than or equal to insertion val
-            else
-            {
-                //fill in the squared arr
-                sqrdArr[sqrdArrIndex] = currNumber * currNumber;
-                sqrdArrIndex++;
-            }
-        }
-        */
     }
 }
