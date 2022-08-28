@@ -7,6 +7,9 @@ namespace LeetCode
         /*
             Given an integer array nums sorted in non-decreasing order, return an array of the squares of each number sorted in non-decreasing order.
              Non-decreasing so subsequent numbers can be the same
+
+            Approach: Store negative converted to positive numbers in a list, then compare the last one to the next value of the passed in array.
+                Whichever value is smaller is squared, placed into the squared array, and its structure index incr'd.
         */
         public int[] SortedSquares(int[] nums) 
         {
@@ -49,35 +52,67 @@ namespace LeetCode
 
             //cache count and useability
             negativeListCount = negativeList.Count();
-            negativeListUseable = negativeListCount > 0 && negativeListIndex < negativeListCount;
+            negativeListUseable = negativeListIndex < negativeListCount;
 
             //loop till arr + list no longer useable
             while( numsArrUseable || negativeListUseable )
             {
-
-                //cache curr # for ops
-                currNumber = nums[numsIndex];
-
-                //if curr number negative
-                if( currNumber < 0 )
+                //if reg arr unuseable but negative list still useable
+                if( negativeListUseable && !numsArrUseable)
                 {
-                    //add to end of negativeList list once turned positive
-                    negativeList.Add(-1 * currNumber);
+                    negativeListCurrNumber = negativeList[negativeListCount-1-negativeListIndex];
 
-                    numsIndex++;
+                    //fill in the squared arr bc insertion val decided accordingly
+                    sqrdArr[sqrdArrIndex] = negativeListCurrNumber * negativeListCurrNumber;
+                    sqrdArrIndex++;
+
+                    negativeListIndex++; //(should only incr index w/ inserted)
                 }
-                //if curr # positive
+                //if negative arr useable
                 else
                 {
-                    //insert val
+                    //cache curr # for ops
+                    currNumber = nums[numsIndex];
 
-                    //if list + arr useable
-                    if( negativeListUseable && numsArrUseable)
+                    //if curr number negative
+                    if( currNumber < 0 )
                     {
-                        negativeListCurrNumber = negativeList[negativeListCount-1-negativeListIndex];
+                        //add to end of negativeList list once turned positive
+                        negativeList.Add(-1 * currNumber);
 
-                        //if curr num has a lower or equal val 
-                        if( negativeListCurrNumber >= currNumber )
+                        numsIndex++;
+                    }
+                    //if curr # positive
+                    else
+                    {
+                        //insert val
+
+                        //if list + arr useable
+                        if( negativeListUseable && numsArrUseable)
+                        {
+                            negativeListCurrNumber = negativeList[negativeListCount-1-negativeListIndex];
+
+                            //if curr num has a lower or equal val 
+                            if( negativeListCurrNumber >= currNumber )
+                            {
+                                //fill in the squared arr w/ curr num
+                                sqrdArr[sqrdArrIndex] = currNumber * currNumber;
+                                sqrdArrIndex++;
+
+                                numsIndex++;
+                            }
+                            //if negativeList list has a lower val
+                            else
+                            {
+                                //fill in the squared arr bc insertion val decided accordingly
+                                sqrdArr[sqrdArrIndex] = negativeListCurrNumber * negativeListCurrNumber;
+                                sqrdArrIndex++;
+
+                                negativeListIndex++; //(should only incr index w/ inserted)
+                            }
+                        }
+                        //if only curr nums arr useable
+                        else if( numsArrUseable )
                         {
                             //fill in the squared arr w/ curr num
                             sqrdArr[sqrdArrIndex] = currNumber * currNumber;
@@ -85,9 +120,11 @@ namespace LeetCode
 
                             numsIndex++;
                         }
-                        //if negativeList list has a lower val
+                        //if only negativeList list useable
                         else
                         {
+                            negativeListCurrNumber = negativeList[negativeListCount-1-negativeListIndex];
+
                             //fill in the squared arr bc insertion val decided accordingly
                             sqrdArr[sqrdArrIndex] = negativeListCurrNumber * negativeListCurrNumber;
                             sqrdArrIndex++;
@@ -95,34 +132,14 @@ namespace LeetCode
                             negativeListIndex++; //(should only incr index w/ inserted)
                         }
                     }
-                    //if only curr nums arr useable
-                    else if( numsArrUseable )
-                    {
-                        //fill in the squared arr w/ curr num
-                        sqrdArr[sqrdArrIndex] = currNumber * currNumber;
-                        sqrdArrIndex++;
 
-                        numsIndex++;
-                    }
-                    //if only negativeList list useable
-                    else if( negativeListUseable )
-                    {
-                        negativeListCurrNumber = negativeList[negativeListCount-1-negativeListIndex];
-
-                        //fill in the squared arr bc insertion val decided accordingly
-                        sqrdArr[sqrdArrIndex] = negativeListCurrNumber * negativeListCurrNumber;
-                        sqrdArrIndex++;
-
-                        negativeListIndex++; //(should only incr index w/ inserted)
-                    }
+                    //cache useability
+                    numsArrUseable = numsIndex < incomingArrLen;
                 }
-
-                //cache useability
-                numsArrUseable = numsIndex < incomingArrLen;
 
                 //cache count and useability
                 negativeListCount = negativeList.Count();
-                negativeListUseable = negativeListCount > 0 && negativeListIndex < negativeListCount;
+                negativeListUseable = negativeListIndex < negativeListCount;
 
             } 
 
