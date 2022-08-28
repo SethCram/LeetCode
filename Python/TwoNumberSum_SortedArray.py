@@ -59,9 +59,67 @@ class Solution:
         
         return ( operand1Index, operand2Index )
         
-        
+    def twoSum(self, numbers: list[int], target: int) -> list[int]:
+        """My attempt at divide and conquer.
 
-nums = [1,2,3,4,4,9,56,90]
+        Args:
+            numbers (List[int]): _description_
+            target (int): _description_
+
+        Returns:
+            List[int]: _description_
+        """
+        #cache count 
+        numbersCount = len( numbers )
+        
+        highIndex = numbersCount-1
+        lowIndex = 1
+        
+        operand1Index = 0 #not same as low index
+        operand2Index = (lowIndex + highIndex) // 2 #double // for int
+        
+        #while haven't reached count w/ operand1Index
+        while( operand1Index < numbersCount):
+            
+            num1 = numbers[operand1Index]
+            num2 = numbers[operand2Index]
+            
+            numSum = num1 + num2
+            
+            if( numSum  == target):
+                break
+            #if search indices converged
+            elif( lowIndex == highIndex ):
+                #advance index1 bc need greater num1
+                operand1Index += 1
+                
+                #reset high + low indices for new triangulating
+                lowIndex = operand1Index + 1
+                highIndex = numbersCount
+                
+            #if sum less than target
+            elif( numSum < target ):
+                
+                #need greater num2 so high lowIndex
+                lowIndex = operand2Index + 1
+                
+            #if sum more than target
+            elif (numSum > target):
+                #prevSumGTTarget = True
+                
+                #need lesser num2 so lower highIndex
+                highIndex = operand2Index
+                
+            #make sure index2 is reset properly to mid
+            operand2Index = (lowIndex + highIndex) // 2
+        
+        
+        operand1Index += 1
+        operand2Index += 1
+        
+        return ( operand1Index, operand2Index )
+
+nums = [1,3,4,4]
 
 newList = Solution.twoSum(self=Solution, numbers=nums, target= 8)
 
