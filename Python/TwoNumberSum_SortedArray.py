@@ -60,7 +60,10 @@ class Solution:
         return ( operand1Index, operand2Index )
         
     def twoSum(self, numbers: list[int], target: int) -> list[int]:
-        """My attempt at divide and conquer.
+        """
+        Approach: Divide and conquer using a binary search. 
+            Keep num1 same and repeatedly choose num2 as the new middle till a number is converged upon by the search indices. 
+            If don't find sum, incr num1 index and repeat process to find a matching num2 for sum.
 
         Args:
             numbers (List[int]): _description_
@@ -95,7 +98,7 @@ class Solution:
                 
                 #reset high + low indices for new triangulating
                 lowIndex = operand1Index + 1
-                highIndex = numbersCount
+                highIndex = numbersCount - 1
                 
             #if sum less than target
             elif( numSum < target ):
