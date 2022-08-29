@@ -1,5 +1,6 @@
 #include <iostream>
 #include <stack>
+#include <vector> //need to us []
 using namespace std;
 
 class Solution {
