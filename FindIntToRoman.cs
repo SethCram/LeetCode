@@ -18,19 +18,9 @@ namespace LeetCode
             //while any number left
             while(num > 0)
             {
-
-                //if divisible by subtr rslt
-                if( num % (mVal - cVal) == 0)
-                {
-                    //subtr number divisible by
-                    num -= mVal - cVal;
-
-                    //add chars
-                    currResult += "CM";
-                }
                 
-                //if number divisible by val of M
-                if( num % mVal == 0 )
+                //if rslt greater than or equal to 0
+                if( num - mVal >= 0 )
                 {
                     //subtr m val
                     num -= mVal;
@@ -38,19 +28,16 @@ namespace LeetCode
                     //append M to result str
                     currResult += 'M';
                 }
-
-                //if divisible by subtr rslt
-                if( num % (dVal - cVal) == 0)
+                //if rslt greater than or equal to 0
+                else if( num - (mVal - cVal) >= 0)
                 {
                     //subtr number divisible by
-                    num -= dVal - cVal;
+                    num -= mVal - cVal;
 
                     //add chars
-                    currResult += "CD";
+                    currResult += "CM";
                 }
-
-                //if number divisible by val
-                if( num % dVal == 0 )
+                else if( num - dVal >= 0 )
                 {
                     //subtr val
                     num -= dVal;
@@ -58,19 +45,16 @@ namespace LeetCode
                     //append letter to result str
                     currResult += 'D';
                 }
-
-                //if divisible by subtr rslt
-                if( num % (cVal - xVal) == 0)
+                else if( num - (dVal - cVal) >= 0)
                 {
                     //subtr number divisible by
-                    num -= cVal - xVal;
+                    num -= dVal - cVal;
 
                     //add chars
-                    currResult += "XC";
+                    currResult += "CD";
                 }
-
                 //if number divisible by val
-                if( num % cVal == 0 )
+                else if( num - cVal >= 0 )
                 {
                     //subtr val
                     num -= cVal;
@@ -78,19 +62,16 @@ namespace LeetCode
                     //append letter to result str
                     currResult += 'C';
                 }
-
-                //if divisible by subtr rslt
-                if( num % (lVal - xVal) == 0)
+                else if( num - (cVal - xVal) >= 0)
                 {
                     //subtr number divisible by
-                    num -= lVal - xVal;
+                    num -= cVal - xVal;
 
                     //add chars
-                    currResult += "XL";
+                    currResult += "XC";
                 }
-
                 //if number divisible by val
-                if( num % lVal == 0 )
+                else if( num - lVal >= 0 )
                 {
                     //subtr val
                     num -= lVal;
@@ -98,19 +79,17 @@ namespace LeetCode
                     //append letter to result str
                     currResult += 'L';
                 }
-
                 //if divisible by subtr rslt
-                if( num % (xVal - iVal) == 0)
+                else if( num - (lVal - xVal) >= 0)
                 {
                     //subtr number divisible by
-                    num -= xVal - iVal;
+                    num -= lVal - xVal;
 
                     //add chars
-                    currResult += "IX";
+                    currResult += "XL";
                 }
-
                 //if number divisible by val
-                if( num % xVal == 0 )
+                else if( num - xVal >= 0 )
                 {
                     //subtr val
                     num -= xVal;
@@ -118,19 +97,17 @@ namespace LeetCode
                     //append letter to result str
                     currResult += 'X';
                 }
-
                 //if divisible by subtr rslt
-                if( num % (vVal - iVal) == 0)
+                else if( num - (xVal - iVal) >= 0)
                 {
                     //subtr number divisible by
-                    num -= vVal - iVal;
+                    num -= xVal - iVal;
 
                     //add chars
-                    currResult += "IV";
+                    currResult += "IX";
                 }
-
                 //if number divisible by val
-                if( num % vVal == 0 )
+                else if( num - vVal >= 0 )
                 {
                     //subtr val
                     num -= vVal;
@@ -138,9 +115,17 @@ namespace LeetCode
                     //append letter to result str
                     currResult += 'V';
                 }
+                //if divisible by subtr rslt
+                else if( num - (vVal - iVal) >= 0)
+                {
+                    //subtr number divisible by
+                    num -= vVal - iVal;
 
+                    //add chars
+                    currResult += "IV";
+                }
                 //if number divisible by val
-                if( num % iVal == 0 )
+                else if( num - iVal >= 0 )
                 {
                     //subtr val
                     num -= iVal;
