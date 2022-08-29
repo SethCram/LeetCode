@@ -65,6 +65,9 @@ class Solution:
             Keep num1 same and repeatedly choose num2 as the new middle till a number is converged upon by the search indices. 
             If don't find sum, incr num1 index and repeat process to find a matching num2 for sum.
 
+        Better approach would be to progressively move the LHS and RHS indices closer to one another until a sol is found.
+            (since og list sorted non-decr order) (would only see each val once)
+
         Args:
             numbers (List[int]): _description_
             target (int): _description_
