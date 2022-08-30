@@ -5,8 +5,10 @@ using namespace std;
 
 class Solution {
 public:
+    //doesn't work likely bc of null character detection not working properly (can't index arr past reg space unless in C?)
     void reverseString(vector<char>& s) // & = pass by ref
     {
+
         //could use a stack to push all, then pop all
         
         //int strLen = s.Length();

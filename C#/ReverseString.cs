@@ -4,14 +4,14 @@ public class ReverseStringClass {
         
         int sLen = s.Length;
 
-        //iterate till hit the null char
+        //iterate thru char arr
         for(int i = 0; i < sLen; i++ )
         {
             //push each char onto stack
             charStack.Push(s[i]);
         }
         
-        //iterate till hit the null char
+        //iterate thru char arr
         for(int i = 0; i < sLen; i++ )
         {
             //pop each char off stack to og string
