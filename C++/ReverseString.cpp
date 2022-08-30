@@ -31,3 +31,16 @@ public:
         
     }
 };
+
+int main()
+{
+    Solution solution;
+
+    vector<char> charVector = {'h', 'e', 'l', 'l', 'o'};
+
+    solution.reverseString(charVector);
+
+    //cout << (string)charVector;
+
+    cout << "end of main";
+}
