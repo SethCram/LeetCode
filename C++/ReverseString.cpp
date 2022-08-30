@@ -36,11 +36,19 @@ int main()
 {
     Solution solution;
 
-    vector<char> charVector = {'h', 'e', 'l', 'l', 'o'};
+    vector<char> charVector; //{'h', 'e', 'l', 'l', 'o'};
+
+    charVector.push_back('h');
+    charVector.push_back('e');
+    charVector.push_back('l');
+    charVector.push_back('l');
+    charVector.push_back('o');
 
     solution.reverseString(charVector);
 
     //cout << (string)charVector;
 
     cout << "end of main";
+
+    return 0;
 }
