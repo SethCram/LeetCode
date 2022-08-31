@@ -35,16 +35,23 @@ class Solution:
             #incr elly count
             numOfNodes += 1
             
-        removalIndex = numOfNodes - 1 - n
+        #n starts from the end and at one 
+        removalIndex = numOfNodes - n
             
-        #if more than 1 node and not removing last node
-        if(numOfNodes > 1  and n != 0):
+        #if more than 1 node and not removing first node
+        if(numOfNodes > 1  and removalIndex != 0):
             #link prev node's nxt to removal node's next
             nodes[removalIndex-1].next = nodes[removalIndex].next
         #only one node in list
         elif( numOfNodes == 1 ):
-            nodes[removalIndex] = None
-        
+            #set node to None (should only set its next to None?)
+            nodes[0] = None
+        #if rm first node
+        elif(removalIndex == 0):
+            #should return nodes[1] as new head?
+            return nodes[1]
+            
+        #ret head of list
         return nodes[0]
     
 middleNode = Solution.middleNode(Solution, [1,2,3,4,5])
