@@ -24,7 +24,10 @@ def getMaxProduct(arr):
     
     subSets = set() 
     
-    newSet = []
+    subsetsOfEachCol = []
+    intermediateSet2 = []
+    phSet = []
+    allSubSets = []
     
     arrColLen = len(arr)
     
@@ -32,14 +35,47 @@ def getMaxProduct(arr):
     arrRowLen = len(arr[0])
 
     #walk across rows
-    for j in range(arrRowLen):
+    #for j in range(arrRowLen):
         #walk down cols
-        for i in range(arrColLen):
-            newSet.append(arr[i][j])
+        #for i in range(arrColLen):
+        #    subsetsOfEachCol.append(arr[i][j])
             
-            if( i > int(arrColLen/2) ):
-                subSets.add(tuple(newSet))    
+        #    if( i > int(arrColLen/2) ):
+        #        subSets.add(tuple(subsetsOfEachCol))    
     
+    #walk down cols
+    for i in range(arrColLen):
+        #for each row, store all possible subsets of atleast half row's size
+        subsetsOfEachCol.append( subsets_of_atleast_given_size(arr[i], int(arrRowLen/2)) )
+    
+    subsetsOfEachColColLen = len(subsetsOfEachCol)
+    subsetsOfEachColRowLen = len(subsetsOfEachCol[0])
+    
+    for j in range( subsetsOfEachColColLen ):
+        #if not at last col
+        if j != subsetsOfEachColColLen - 1:
+                
+            #create two indixes to count across curr and below row
+            for k in range( subsetsOfEachColRowLen  ):
+                for p in range( subsetsOfEachColRowLen ):
+                    
+                    #if at first col 
+                    if j == 0:
+                        #concat every below row elly w/ every curr row elly
+                        phSet.append( subsetsOfEachCol[j][k] + subsetsOfEachCol[j+1][p] )
+                    else:
+                        #concat every below row elly w/ every curr intermediate row elly
+                        phSet.append( intermediateSet2[j-1][k] + subsetsOfEachCol[j+1][p] )
+
+                    if j == subsetsOfEachColColLen - 2:
+                        allSubSets.append( phSet[-1] )
+                
+                if j != subsetsOfEachColColLen - 2:
+                
+                    intermediateSet2.append( phSet )
+                
+                phSet = []
+            
     pass
 
 
@@ -55,10 +91,6 @@ def subsets_of_atleast_given_size(numbers, n):
 
 if __name__ == '__main__':
     #fptr = open(os.environ['OUTPUT_PATH'], 'w')
-    
-    numbers = [1, 2, 3, 4]
-    n = 3
-    print(subsets_of_atleast_given_size(numbers, n))
 
     arr_rows = int(input().strip())
     arr_columns = int(input().strip())
