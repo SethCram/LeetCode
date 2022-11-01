@@ -22,8 +22,6 @@ def getMaxProduct(arr):
     
     #find all possible subsets taking atleast m/2 vals from each row
     
-    subSets = set() 
-    
     subsetsOfEachCol = []
     intermediateSet2 = []
     phSet = []
@@ -32,16 +30,7 @@ def getMaxProduct(arr):
     arrColLen = len(arr)
     
     #assuming all rows have the same length
-    arrRowLen = len(arr[0])
-
-    #walk across rows
-    #for j in range(arrRowLen):
-        #walk down cols
-        #for i in range(arrColLen):
-        #    subsetsOfEachCol.append(arr[i][j])
-            
-        #    if( i > int(arrColLen/2) ):
-        #        subSets.add(tuple(subsetsOfEachCol))    
+    arrRowLen = len(arr[0])  
     
     #walk down cols
     for i in range(arrColLen):
