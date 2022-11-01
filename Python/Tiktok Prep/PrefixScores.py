@@ -22,6 +22,8 @@ import sys
 # 4
 # 2
 
+# Slow but accurate
+
 import copy
 import numpy as np
 
