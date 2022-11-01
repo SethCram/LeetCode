@@ -37,15 +37,11 @@ def getPrefixScores_NoPrefixArr(arr):
     
     for i in range(arrLen):
         
-        #prefixArr = copy.deepcopy(arr[:i+1]) #arr slicing exclusive
-        
-        #prefixArrMax = max(prefixArr)
         prefixArrMax = max(arr[:i+1])
         
         #if prev max not set or this prefix arr max isn't the same as last
         if i == 0 or prefixArrMax != prevMax:
             
-            #prefixArrLen = len(prefixArr)
             prefixArrLen = i + 1
             
             #recalc all the prefix sums
@@ -54,27 +50,22 @@ def getPrefixScores_NoPrefixArr(arr):
                 if j == 0:
                     prefixSum = prefixArrMax
                 else:
-                    #prefixSum = copy.deepcopy( prefixArr[j-1] )
                     prefixSum = lastSum
                 
-                #prefixArr[j] += prefixSum
-                lastSum = arr[j-1] + prefixSum
+                lastSum = arr[j] + prefixSum
+                
+                #print(f"Last sum {lastSum} created by {arr[j]} + {prefixSum}")
                 
                 scoreSum += lastSum
-                
-                #if j == prefixArrLen - 1:
-                #    lastPrefixArrSum = copy.deepcopy( prefixArr[j] )
             
             prevMax = prefixArrMax
-            
-            #scoreArr[i] = sum(prefixArr) % (10**9 + 7)
+        
             scoreArr[i] = scoreSum % (10**9 + 7)
             
             scoreSum = 0
             
         #if max is the same as last max
         else:
-            #lastPrefixArrSum += prefixArr[-1]
             lastSum += arr[i]
             
             #only update score to account for new last value 
@@ -84,7 +75,6 @@ def getPrefixScores_NoPrefixArr(arr):
             
     return scoreArr
         
-
 def getPrefixScores_PrefixArr(arr):
     # Write your code here
     
