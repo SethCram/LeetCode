@@ -25,7 +25,67 @@ import sys
 import copy
 import numpy as np
 
-def getPrefixScores(arr):
+def getPrefixScores_NoPrefixArr(arr):
+    # Write your code here
+    
+    arrLen = len(arr)
+    
+    scoreArr = np.empty(arrLen, dtype=int)
+    scoreSum = 0
+    
+    prevMax = None
+    
+    for i in range(arrLen):
+        
+        #prefixArr = copy.deepcopy(arr[:i+1]) #arr slicing exclusive
+        
+        #prefixArrMax = max(prefixArr)
+        prefixArrMax = max(arr[:i+1])
+        
+        #if prev max not set or this prefix arr max isn't the same as last
+        if i == 0 or prefixArrMax != prevMax:
+            
+            #prefixArrLen = len(prefixArr)
+            prefixArrLen = i + 1
+            
+            #recalc all the prefix sums
+            for j in range(prefixArrLen):
+                
+                if j == 0:
+                    prefixSum = prefixArrMax
+                else:
+                    #prefixSum = copy.deepcopy( prefixArr[j-1] )
+                    prefixSum = lastSum
+                
+                #prefixArr[j] += prefixSum
+                lastSum = arr[j-1] + prefixSum
+                
+                scoreSum += lastSum
+                
+                #if j == prefixArrLen - 1:
+                #    lastPrefixArrSum = copy.deepcopy( prefixArr[j] )
+            
+            prevMax = prefixArrMax
+            
+            #scoreArr[i] = sum(prefixArr) % (10**9 + 7)
+            scoreArr[i] = scoreSum % (10**9 + 7)
+            
+            scoreSum = 0
+            
+        #if max is the same as last max
+        else:
+            #lastPrefixArrSum += prefixArr[-1]
+            lastSum += arr[i]
+            
+            #only update score to account for new last value 
+            scoreArr[i] = (scoreArr[i-1] + lastSum) % (10**9 + 7)
+            
+        #print(prefixArr)
+            
+    return scoreArr
+        
+
+def getPrefixScores_PrefixArr(arr):
     # Write your code here
     
     arrLen = len(arr)
@@ -68,10 +128,9 @@ def getPrefixScores(arr):
             #only update score to account for new last value 
             scoreArr[i] = (scoreArr[i-1] + lastPrefixArrSum) % (10**9 + 7)
             
-        print(prefixArr)
+        #print(prefixArr)
             
     return scoreArr
-        
 
 if __name__ == '__main__':
     #fptr = open(os.environ['OUTPUT_PATH'], 'w')
@@ -83,10 +142,11 @@ if __name__ == '__main__':
     for _ in range(arr_count):
         arr_item = int(input().strip())
         arr.append(arr_item)
-
-    result = getPrefixScores(arr)
     
-    print('\n'.join(map(str, result)))
+    print("No prefix arr results: ")
+    print('\n'.join(map(str, getPrefixScores_NoPrefixArr(arr))))
+    print("Using prefix arr results: ")
+    print('\n'.join(map(str, getPrefixScores_PrefixArr(arr))))
 
     #fptr.write('\n'.join(map(str, result)))
     #fptr.write('\n')
