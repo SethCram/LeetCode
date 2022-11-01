@@ -30,7 +30,7 @@ def getPrefixScores(arr):
     
     arrLen = len(arr)
     
-    scoreArr = np.empty(arrLen)
+    scoreArr = np.empty(arrLen, dtype=int)
     
     prevMax = None
     
@@ -43,8 +43,10 @@ def getPrefixScores(arr):
         #if prev max not set or this prefix arr max isn't the same as last
         if i == 0 or prefixArrMax != prevMax:
             
+            prefixArrLen = len(prefixArr)
+            
             #recalc all the prefix sums
-            for j in range(len(prefixArr)):
+            for j in range(prefixArrLen):
                 
                 if j == 0:
                     prefixSum = prefixArrMax
@@ -52,14 +54,21 @@ def getPrefixScores(arr):
                     prefixSum = copy.deepcopy( prefixArr[j-1] )
                 
                 prefixArr[j] += prefixSum
+                
+                if j == prefixArrLen - 1:
+                    lastPrefixArrSum = copy.deepcopy( prefixArr[j] )
             
             prevMax = prefixArrMax
             
-            scoreArr[i] = sum(prefixArr)
+            scoreArr[i] = sum(prefixArr) % (10**9 + 7)
         #if max is the same as last max
         else:
+            lastPrefixArrSum += prefixArr[-1]
+            
             #only update score to account for new last value 
-            scoreArr[i] = 2 * scoreArr[i-1] + prefixArr[-1]
+            scoreArr[i] = (scoreArr[i-1] + lastPrefixArrSum) % (10**9 + 7)
+            
+        print(prefixArr)
             
     return scoreArr
         
