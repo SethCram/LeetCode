@@ -10,6 +10,16 @@ namespace LeetCode
 
             Approach: Store negative converted to positive numbers in a list, then compare the last one to the next value of the passed in array.
                 Whichever value is smaller is squared, placed into the squared array, and its structure index incr'd.
+        
+            Speed: O(N)
+            Space: O(N)
+
+            sometimes people say to count the output data stucture 
+            in the calculation, and sometimes they don't. 
+            If we're talking about auxillary space, 
+            we generally don't count the output data structure
+
+            Built in ops = NLog(N) time complexity
         */
         public int[] SortedSquares(int[] nums) 
         {

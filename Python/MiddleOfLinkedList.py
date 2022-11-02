@@ -48,6 +48,26 @@ class Solution:
         else:
             return nodes[ceil(numOfNodes / 2)-1]
     
+    def MiddleNodeSol(self, head: Optional[ListNode]) -> Optional[ListNode]:
+        """
+        Speed: O(N)
+        Space: O(1)
+
+        Args:
+            head (Optional[ListNode]): _description_
+
+        Returns:
+            Optional[ListNode]: _description_
+        """
+        slow = head
+        fast = head
+        
+        while fast != None and fast.next != None:
+            slow = slow.next
+            fast = fast.next.next
+            
+        return slow
+    
 middleNode = Solution.middleNode(Solution, [1,2,3,4,5])
 
 print(middleNode)
