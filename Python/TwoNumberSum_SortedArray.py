@@ -125,6 +125,20 @@ class Solution:
         
         return ( operand1Index, operand2Index )
 
+    # two-pointer
+    # speed: O(N)
+    # space: O(1) = constant
+    def twoSumPointers(self, numbers, target):
+        l, r = 0, len(numbers)-1
+        while l < r:
+            s = numbers[l] + numbers[r]
+            if s == target:
+                return [l+1, r+1]
+            elif s < target:
+                l += 1
+            else:
+                r -= 1
+
 nums = [1,3,4,4]
 
 newList = Solution.twoSum(self=Solution, numbers=nums, target= 8)

@@ -13,6 +13,14 @@ class Solution:
         return versionNumber >= 10
     
     def firstBadVersion(self, n: int) -> int:
+        """Binary search.
+
+        Args:
+            n (int): _description_
+
+        Returns:
+            int: _description_
+        """
         highIndex = n
         lowIndex = 0
         
@@ -55,5 +63,24 @@ class Solution:
             
         #return one of the converged indices
         return highIndex
+
+    def firstBadVersionSol(self, n):
+        """Simple binary search using two pointers.
+
+        Args:
+            n (_type_): _description_
+
+        Returns:
+            _type_: _description_
+        """
+        l=1
+        r=n
+        while l<r:
+            m=(l+r)/2
+            if self.isBadVersion(m):
+                r=m #if middle is bad version, it could still be the final bad version
+            else:
+                l=m+1 #if middle isn't bad version, need atleast next index to check
+        return l #always ret index that's incr'd past middle if while isn't equal to?
 
 print( Solution.firstBadVersion(self=Solution, n=10) )

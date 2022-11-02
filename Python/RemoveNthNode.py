@@ -54,6 +54,6 @@ class Solution:
         #ret head of list
         return nodes[0]
     
-middleNode = Solution.middleNode(Solution, [1,2,3,4,5])
+middleNode = Solution.middleNode(Solution, [1,2,3,4,5], 3)
 
 print(middleNode)

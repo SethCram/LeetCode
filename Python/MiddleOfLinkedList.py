@@ -15,6 +15,9 @@ If there are two middle nodes, return the second middle node.
 Constraints:
 The number of nodes in the list is in the range [1, 100].
 1 <= Node.val <= 100
+
+Speed: O(N)
+Space: O(N)
 """
 class Solution:
     def middleNode(self, head: Optional[ListNode]) -> Optional[ListNode]:

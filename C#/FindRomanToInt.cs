@@ -22,11 +22,11 @@ namespace LeetCode
                     //pass in last char as prev char
                     sum += convertToInt( lastChar: s[i-1], numeral: s[i] );
                 }
-            else
-            {
-                    //pass in last char as curr char
-                    sum += convertToInt(  numeral: s[i], firstChar: true );
-            }
+                else
+                {
+                        //pass in last char as curr char
+                        sum += convertToInt(  numeral: s[i], firstChar: true );
+                }
             }
 
             return sum;

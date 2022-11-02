@@ -15,17 +15,17 @@ namespace LeetCode
             //int[] intArr = {-10000,-9999,-7,-5,0,0,10000};
             //sortedArrSqrs.SortedSquares( nums: intArr );
 
-            //ReverseStringClass reverseStringClass = new ReverseStringClass();
-            //char[] charArr = {'h','e','l','l','o'};
-            //reverseStringClass.ReverseString(charArr);
-            //Console.WriteLine(charArr);
+            ReverseStringClass reverseStringClass = new ReverseStringClass();
+            char[] charArr = {'h','e','l','l','o'};
+            reverseStringClass.ReverseStringSol(charArr);
+            Console.WriteLine(charArr);
 
-            string testStr = "Let's take LeetCode contest";
+            //string testStr = "Let's take LeetCode contest";
+            //ReverseWordsClass reverseWordsClass = new ReverseWordsClass();
+            //reverseWordsClass.ReverseWords(testStr);
+            //Console.WriteLine(testStr);
 
-            ReverseWordsClass reverseWordsClass = new ReverseWordsClass();
-            reverseWordsClass.ReverseWords(testStr);
 
-            Console.WriteLine(testStr);
         }
 
     }

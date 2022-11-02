@@ -79,6 +79,9 @@ class Solution:
     def stolenSearchInsert(self, nums: list[int], target: int) -> int:
         """Taken off online and not sure why works so well. Likely bc it converged in the lower index and not the upper.
 
+            Binary search for target
+                if not found, index to the right of last middle ret'd, which should be insert loc
+
         Args:
             nums (list[int]): _description_
             target (int): _description_

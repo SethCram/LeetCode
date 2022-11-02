@@ -1,6 +1,6 @@
 class Solution:
     def search(self, nums: list[int], target: int) -> int:
-        """Non recursive 'interval' (binary?) search. Requires data set in ascending order.
+        """Non recursive 'interval'/binary search. Requires data set in ascending order.
 
         Args:
             nums (list[int]): Requires data set in ascending order.
