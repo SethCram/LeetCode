@@ -72,6 +72,11 @@ class Solution:
     def minMutation_attempt2(self, start: str, end: str, bank: list[str]) -> int:
         """Treat start as root, end as goal, and bank as middle nodes in a tree.
         Edges are when hamming distance of 1 between currNode and bank node.
+        
+        BFS speed: O(Vertices + Edges) so O(bankSize+2 + bankSize+1) so O(bankSize)
+        space: O(bankSize)
+        
+        when an algorithm has O(log n) running time, it means that as the input size grows, the number of operations grows very slowly.
 
         Args:
             start (str): _description_
@@ -89,10 +94,6 @@ class Solution:
         
         bankSize = len(bank)
         
-        #lis = [start != bank[0] for i in bankSize]
-        #summation = sum( start[i] != bank[0][i] for i in range(8) )
-        #sum( 1 for i in bankSize if start[i] != bank[0][i] )
-        
         Q.put(start)
         visited = [False] * (bankSize + 2) #tot nodes/vertices in tree
         
@@ -108,14 +109,19 @@ class Solution:
             
             for _ in range(nodesAtCurrLevel):
                 
+                #print(list(Q.queue))
+                
                 root = Q.get()
                 
                 for i in range(bankSize):
                     
                     currBankNode = bank[i] 
                     
+                    #calc num of diff chars tween curr root and curr bank node
+                    diffChars = sum( root[j] != bank[i][j] for j in range(8) )
+                    
                     if (
-                        sum( root[i] != bank[0][i] for i in range(8) ) == 1 #if hamming distance of 1 bc only 1 mutated char
+                        diffChars == 1 #if hamming distance of 1 bc only 1 mutated char
                         and not visited[i+1] #if not visited yet (account for root node at 0)
                     ) :
                         visited[i+1] = True
@@ -124,7 +130,8 @@ class Solution:
                             return depth
                         else:
                             Q.put(currBankNode)
-                            #bank.remove(currBankNode)
+                            
+                            #print(list(Q.queue))
                             
         return -1
 
