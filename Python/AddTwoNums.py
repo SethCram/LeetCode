@@ -18,7 +18,10 @@ class ListNode:
          
 class Solution:
     def addTwoNumbers(self, l1: Optional[ListNode], l2: Optional[ListNode]) -> Optional[ListNode]:
-        """Incorrectly assumes both LLs are the same size.
+        """Accounts for differnt size LLs through checking for None and using ph vals.
+        Uses a carryOver to account for single digit addition overflow.
+        speed: O(N)
+        auxiliarry space: O(1)
 
         Args:
             l1 (Optional[ListNode]): _description_
@@ -34,8 +37,24 @@ class Solution:
         
         carryOver = 0
         
-        while l1 != None:
-            phSum = l1.val + l2.val + int(carryOver)
+        #while either list still not finished
+        while l1 != None or l2 != None:
+            
+            if l1 == None:
+                l1Val = 0
+                l1Next = None
+            else:
+                l1Val = l1.val
+                l1Next = l1.next
+            
+            if l2 == None:
+                l2Val = 0
+                l2Next = None
+            else:
+                l2Val = l2.val
+                l2Next = l2.next
+        
+            phSum = l1Val + l2Val + int(carryOver)
             
             phSumStr = str(phSum)
             
@@ -49,9 +68,9 @@ class Solution:
             l3.val = int(phSumStr[-1])
             
             #if haven't reached end of lists
-            if l1.next != None:
+            if l1Next != None or l2Next != None:
                 l3.next = ListNode()
-            #if still carry over and reached end of lists
+            #if still carry over and reached end of both lists
             elif carryOver != 0:
                 #create new node and advance to it
                 l3.next = ListNode()
@@ -66,10 +85,14 @@ class Solution:
                 #terminate l3
                 l3.next = None
             
-            #advance every list node pointer
+            #advance every list node pointer if not at end of respective list
             l3 = l3.next
-            l2 = l2.next
-            l1 = l1.next
+            
+            if l2 != None:
+                l2 = l2.next
+            
+            if l1 != None:
+                l1 = l1.next
                 
         #print(l3)
         
