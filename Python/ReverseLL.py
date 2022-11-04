@@ -1,3 +1,6 @@
+import copy
+
+
 class ListNode:
      def __init__(self, val=0, next=None):
          self.val = val
@@ -18,6 +21,10 @@ class Solution:
         Speed: O(N)
         Space: O(1)
         """
+        
+        #prevents original list from being clobbered
+        head = copy.deepcopy(head)
+        
         #init pointers
         prevNode = head
         prevPrevNode = None
@@ -37,7 +44,7 @@ class Solution:
         head = prevPrevNode #shouldn't this set head correctly?? Seems to but l1 remains at 2
         print(f"Head During: {head}")
         
-        return prevPrevNode
+        return head
             
 sol = Solution()
 l1 = ListNode(2)
