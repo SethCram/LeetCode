@@ -3,7 +3,11 @@ class Solution:
         
         comboStrs = words[:]
         
-        self.CreateAllStrs(words, words, comboStrs)  
+        print(words[0])
+        
+        words2D  = [[twoLetterWord] for twoLetterWord in words]
+        
+        self.CreateAllStrs(words2D, words2D, comboStrs)  
         
         #walk thru combo strs
         for i in range(1, len(comboStrs)+1):
@@ -29,10 +33,13 @@ class Solution:
         
         for currWord in currWordList:
             for twoLetterWord in twoLetterWords:
-                if twoLetterWord not in currWord: #doesn't work bc doesn't segment word into pairs of 2 chars
+                if "".join(twoLetterWord) not in currWord: #doesn't work bc doesn't account for duplicate 2 letter word in words
                     nextWordsList.append( currWord + twoLetterWord )
                     
-                    comboStrs.append( currWord + twoLetterWord )
+                    comboStrs.append( "".join(nextWordsList[-1]) )
+             
+        if nextWordsList == []:
+            raise ValueError
                     
         #comboStrs.append(nextWordsList[:])
         
