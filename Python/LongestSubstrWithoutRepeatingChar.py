@@ -1,4 +1,7 @@
 class Solution:
+    """
+        Given a string s, find the length of the longest substring without repeating characters.
+    """
     def lengthOfLongestSubstring(self, s: str) -> int:
         """Sliding window/double pointer technique with default dictionary.
         Speed: O(N)
