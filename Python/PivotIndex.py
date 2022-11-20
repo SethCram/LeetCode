@@ -36,3 +36,31 @@ class Solution:
                 return i
         
         return -1
+    
+    def pivotIndex_Fast(self, nums: list[int]) -> int:
+        """
+        Speed: O(2N) bc half to walk thru arr twice, once to init rhsSum, once as iterating
+            (technically O(N) since consts dont matter)
+        Space: O(1)
+
+        Args:
+            nums (list[int]): _description_
+
+        Returns:
+            int: _description_
+        """
+        for i,num in enumerate(nums):
+            if i == 0:
+                #init both sums
+                lhsSum = 0
+                rhsSum = sum(nums[i+1:])
+            else:
+                #update lhs sum
+                lhsSum = lhsSum + nums[i-1]
+                #update rhs sum
+                rhsSum = rhsSum - num
+            
+            if rhsSum == lhsSum:
+                return i
+        
+        return -1
