@@ -21,6 +21,16 @@ Space: O(N)
 """
 class Solution:
     def middleNode(self, head: Optional[ListNode]) -> Optional[ListNode]:
+        """
+        Speed: O(N)
+        Space: O(N)
+
+        Args:
+            head (Optional[ListNode]): _description_
+
+        Returns:
+            Optional[ListNode]: _description_
+        """
         nodes = [head]
         numOfNodes = 1
         
@@ -49,7 +59,9 @@ class Solution:
             return nodes[ceil(numOfNodes / 2)-1]
     
     def MiddleNodeSol(self, head: Optional[ListNode]) -> Optional[ListNode]:
-        """
+        """Double pointer approach.
+            slower pntr goes 1 by 1, fast pntr 2 by 2.
+            when fast pntr reaches the end, slower pntr will be at the middle of the list.
         Speed: O(N)
         Space: O(1)
 
