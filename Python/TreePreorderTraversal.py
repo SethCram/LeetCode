@@ -9,6 +9,8 @@ class Solution:
     Given the root of an n-ary tree, return the preorder traversal of its nodes' values.
 
     Nary-Tree input serialization is represented in their level order traversal. Each group of children is separated by the null value (See examples)
+    
+    *Should try out iterative solution using a stack*
     """
     def preorder(self, root: Node) -> list[int]:
         """DFS using recursion
