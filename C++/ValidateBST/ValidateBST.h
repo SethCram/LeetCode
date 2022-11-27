@@ -175,3 +175,87 @@ private:
         return true; //why is this needed?
     }
 };
+
+#include <stdio.h>
+
+/**
+ * Definition for a binary tree node.
+ * struct TreeNode {
+ *     int val;
+ *     TreeNode *left;
+ *     TreeNode *right;
+ *     TreeNode() : val(0), left(nullptr), right(nullptr) {}
+ *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
+ *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
+ * };
+ */
+class Solution3 {
+public:
+    bool isValidBST(TreeNode* root) {
+        
+        return isValidBST_Recursion(root, root -> val, root -> val); //always atleast the root
+        
+    }
+    
+private:
+    bool isValidBST_Recursion(TreeNode* root, int minValFound, int maxValFound)
+    {
+        if(root == nullptr) // C++ has alota diff nulls
+        {
+            return true;
+        }
+        
+        int rootVal = root -> val;
+        
+        if(rootVal < minValFound)
+        {
+            minValFound = rootVal;
+        }
+        
+        if(rootVal > maxValFound)
+        {
+            maxValFound = rootVal;
+        }
+        
+        printf("Root val %d, min %d, max %d\n", rootVal, minValFound, maxValFound);
+        
+        TreeNode* leftNode = root -> left;
+        TreeNode* rightNode = root -> right;
+        
+        if(leftNode != nullptr)
+        {
+            int leftNodeVal = leftNode -> val;
+            
+            //if a left node is ever bigger than another node
+            if( minValFound <= leftNodeVal )
+            {
+                return false;
+            }
+
+            //only propogate response if negative
+            if( !isValidBST_Recursion(leftNode, minValFound, maxValFound) )
+            {
+                return false;
+            }
+        }
+        
+        if(rightNode != nullptr)
+        {
+            int rightNodeVal = rightNode -> val;
+            
+            //if another node is ever bigger than a right node
+            if( maxValFound >= rightNodeVal )
+            {
+                return false;
+            }
+
+            //only propogate response if negative
+            if( !isValidBST_Recursion(rightNode, minValFound, maxValFound) )
+            {
+                return false;
+            }
+        }
+        
+        return true; //why is this needed?
+    }
+};
