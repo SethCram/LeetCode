@@ -267,10 +267,18 @@ public:
         return validate(root, prev);
     }
     bool validate(TreeNode* node, TreeNode* &prev) {
+        //base case
         if (node == NULL) return true;
+        //go down left subtree and propogate false if ret'd
         if (!validate(node->left, prev)) return false;
+        //inorder traversal and checking 
         if (prev != NULL && prev->val >= node->val) return false;
+        
+        //printf("%d\n", node -> val);
+        
+        //specify (LHS child as prev node?), then shared parent node
         prev = node;
+        //go down right subtree (doesn't propogate flase if ret'd?)
         return validate(node->right, prev);
     }
 };
