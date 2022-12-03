@@ -1,8 +1,17 @@
 from collections import defaultdict
 
 class Solution:
+    """
+    Given two strings s and p, return an array of all the start indices of p's anagrams in s. You may return the answer in any order.
+
+    An Anagram is a word or phrase formed by rearranging the letters of a different word or phrase, typically using all the original letters exactly once.
+    """
     def findAnagrams(self, s: str, p: str) -> list[int]:
-        """Doesn't work
+        """Sliding window 
+        Speed: O(P + S) bc iterate once thru s and once thru p, 
+            worst case O(P + 26*S) bc everytime go thru S, iterate thru entire hashmap
+        Space: O(1) bc hashmap uses constant space,
+            worst would be O(26)
 
         Args:
             s (str): _description_
@@ -18,39 +27,33 @@ class Solution:
             pCountDict[pElly] += 1
         
         substrIndices = []
-
+        
+        pLen = len(p)
+        
         #window start
         j = 0
         
         #walk thru chars in s
         for i,sElly in enumerate(s):
-            #if s char is in p and can still use that char
-            if sElly in pCountDict and pCountDict[sElly] > 0:
+            
+            #move top of window
+            if sElly in pCountDict: 
                 #rm one occurence of s char from p
                 pCountDict[sElly] -= 1
                 
-                #if no chars left to use, anagram found
-                if all(occurences == 0 for occurences in pCountDict.values()): #(i - j) + 1 == pLen: 
-                    #append starting index of substr
-                    substrIndices.append(j)
-                    
-                    if s[j] in pCountDict:
-                        #readd one occurence of s char from p
-                        pCountDict[s[j]] += 1
-                    
-                    #advance bot of window
-                    j += 1
-                
-                #print(pCountDict)
-            else:
-                #print(pCountDict)
+            #if window been established
+            if i >= pLen:
+
+                #if number leaving bot of window was kept track of
                 if s[j] in pCountDict:
                     #readd one occurence of s char from p
                     pCountDict[s[j]] += 1
-                #print(pCountDict)
-                
                 #advance bot of window
                 j += 1
+            
+            #if no chars left to use, anagram found
+            if all(occurences == 0 for occurences in pCountDict.values()):
+                #append starting index of substr
+                substrIndices.append(j)
         
         return substrIndices
-            
