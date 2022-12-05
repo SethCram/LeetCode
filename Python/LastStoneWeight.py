@@ -21,6 +21,7 @@ class Solution:
             and creating initial heap requires a full pass through list
             
             Worst case speed is likely O((3*N)*(3*logN)) but constants don't mater long term
+                (wouldnt it actually be O((N^3)*(logN^3))?, no bc that'd require 3 loops, each inside the last )
 
         Args:
             stones (list[int]): _description_
