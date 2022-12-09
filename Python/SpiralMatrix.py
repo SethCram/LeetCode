@@ -5,7 +5,9 @@ class Solution:
     def spiralOrder(self, matrix: list[list[int]]) -> list[int]:
         """iterative approach of repeatedly going right, down, left, up
         Speed: O(N)
-        Space: O(N) for visited list
+        Space: O(N) for visited list,
+            could decrease to O(1) thru incring/decring colCount and rowCount 
+            instead of using visited array
 
         Args:
             matrix (list[list[int]]): _description_
