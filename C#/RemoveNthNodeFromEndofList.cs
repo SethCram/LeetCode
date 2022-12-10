@@ -65,3 +65,63 @@ public class Solution {
         return ogHead;
     }
 }
+
+public class Solution2 {
+    /// <summary> 
+    /// Double pointer approach maintaining n+1 distance tween them
+    /// Speed: O(N)
+    /// Space: O(1)
+    /// </summary>
+    /// <param name="head"></param>
+    /// <param name="n"></param>
+    /// <returns></returns>
+    public ListNode RemoveNthFromEnd(ListNode head, int n) {
+
+        ListNode ogHead = head;
+
+        ListNode beforeRemovalNode = head;
+
+        int lengthCounter = 0;
+
+        int beforeRemovalIndex = 0;
+
+        //walk thru LL + add nodes to new list + count its length
+        while(head != null)
+        {
+            //advance node + counter
+            head = head.next;
+            lengthCounter++;
+
+            //if two pntrs too far apart, advance removal node
+            if((lengthCounter - beforeRemovalIndex) > n+1) //wanna be right before removal node
+            {
+                beforeRemovalNode = beforeRemovalNode.next;
+            }
+        }
+
+        //Console.WriteLine($"{removeIndex.ToString()}, {lengthCounter.ToString()}");
+
+        int removalIndex = lengthCounter - n;
+
+        //if removing head + more than 1 node
+        if(removalIndex == 0 && lengthCounter > 1)
+        {
+            //set head to next node
+            ogHead = beforeRemovalNode.next;
+        }
+        //if removing head + only 1 node
+        else if(removalIndex == 0)
+        {
+            //clear head
+            ogHead = null;
+        }
+        //if removing anything besides head
+        else
+        {
+            //set prev node's next as removal node's next
+            beforeRemovalNode.next = beforeRemovalNode.next.next;
+        }
+
+        return ogHead;
+    }
+}
