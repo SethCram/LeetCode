@@ -5,7 +5,7 @@ public class LongestPalindromeByConcat2LetterWords
 {
     public int LongestPalindrome(string[] words)
     {
-        Dictionary<char, int> letterCountDict = new Dictionary<char, int>();
+        Dictionary<string, int> letterCountDict = new Dictionary<string, int>();
 
         int unpaired = 0;
         int palindromeLength = 0;
@@ -13,52 +13,64 @@ public class LongestPalindromeByConcat2LetterWords
         //walk thru words
         for (int i = 0; i < words.Length; i++)
         {
-            //walk thru letters
-            for (int j = 0; j < words[i].Length; j++)
+            string currWord = words[i];
+
+            bool lettersSame = (currWord[0] == currWord[1]);
+
+            string currWordReverse = String.Concat(currWord[1], currWord[0]);
+
+            bool currWordPresent = letterCountDict.TryGetValue(currWord, out int currWordCount);
+
+            //if dict has word reverse
+            bool reverseWordPresent = letterCountDict.TryGetValue(currWordReverse, out int reverseWordCount);
+
+            //if reverse word present + curr word missing or enough left to pair
+            if(reverseWordPresent && (!currWordPresent || reverseWordCount > currWordCount) )
             {
-                //cache curr letter
-                char currLetter = words[i][j];
+                //4 letters added to palindrome
+                palindromeLength += 4;
+            }
 
-                //if dict has letter
-                if (letterCountDict.TryGetValue(currLetter, out int currLetterCount))
+            //if curr word present
+            if(currWordPresent)
+            {
+                //incr count of it
+                letterCountDict[currWord] = currWordCount + 1;
+
+                //if same letters and odd count of them
+                if(lettersSame && currWordCount % 2 != 0)
                 {
-                    //if adding to even number of nums
-                    if(currLetterCount % 2 == 0)
-                    {
-                        //unpaired letter found
-                        unpaired++;
-                    }
-                    //if adding to odd number of nums
-                    else
-                    {
-                        //pair found for letter
-                        unpaired--;
-                        //so, 2 letters added to palindrome
-                        palindromeLength += 2;
-                    }
+                    unpaired -= 1;
 
-                    //incr letter count 
-                    letterCountDict[currLetter] = currLetterCount + 1;
+                    //4 letters added to palindrome
+                    palindromeLength += 4;
                 }
-                //if dict doesnt have letter
-                else
+                //if same letters w/ even count
+                else if(lettersSame)
                 {
-                    //init its count to 1
-                    letterCountDict[currLetter] = 1;
-                    //unpaired letter
-                    unpaired++;
+                    unpaired += 1;
+                }
+            }
+            //curr word missing
+            else
+            {
+                //init its count to 1
+                letterCountDict[currWord] = 1;
+
+                if(lettersSame)
+                {
+                    unpaired += 1;
                 }
             }
         }
 
-        //if any unpaired letters left
+        //if any unpaired words left
         if(unpaired > 0)
         {
             //account for it being added to the middle of palindrome
-            palindromeLength += 1;
+            palindromeLength += 2;
         }
 
         return palindromeLength;
-
     }
 }
