@@ -3,6 +3,12 @@
 /// </summary>
 public class LongestPalindromeByConcat2LetterWords
 {
+    /// <summary>
+    /// speed: O(N) bc hashmap has const access time and see each word only once
+    /// space: O(1) bc hashmap uses const space
+    /// </summary>
+    /// <param name="words"></param>
+    /// <returns></returns>
     public int LongestPalindrome(string[] words)
     {
         Dictionary<string, int> letterCountDict = new Dictionary<string, int>();
