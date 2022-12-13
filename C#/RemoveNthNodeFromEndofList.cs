@@ -12,7 +12,7 @@ public class ListNode {
 /// <summary>
 /// Given the head of a linked list, remove the nth node from the end of the list and return its head
 /// </summary>
-public class Solution {
+public class RemoveNthNodeFromEndofList {
     /// <summary>
     /// Time Complexity: O(N) bc only 1 pass thru LL
     /// Space Complexity: O(N) bc entire LL copied into list for indexing
@@ -66,7 +66,7 @@ public class Solution {
     }
 }
 
-public class Solution2 {
+public class RemoveNthNodeFromEndofList2 {
     /// <summary> 
     /// Double pointer approach maintaining n+1 distance tween them
     /// Speed: O(N)
