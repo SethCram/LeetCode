@@ -35,7 +35,7 @@ public class HappyNumber
 
                 sqrOfDigits += remainderSqrd;
 
-                double nDivTen = n / 10;
+                double nDivTen = n / 10; //floor funct must take double, not a float
 
                 //Console.WriteLine($"{n} div'd by 10 {nDivTen.ToString()}");
 
