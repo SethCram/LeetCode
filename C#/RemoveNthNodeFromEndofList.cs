@@ -68,7 +68,8 @@ public class RemoveNthNodeFromEndofList {
 
 public class RemoveNthNodeFromEndofList2 {
     /// <summary> 
-    /// Double pointer approach maintaining n+1 distance tween them
+    /// Double pointer approach maintaining n+1 distance tween pntrs
+    ///   since n is the distance from the end of the list
     /// Speed: O(N)
     /// Space: O(1)
     /// </summary>

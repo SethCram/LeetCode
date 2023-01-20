@@ -4,7 +4,7 @@ public class ReverseStringClass {
     /// You must do this by modifying the input array in-place with O(1) extra memory.
     /// Stack approach
     /// Speed: O(N^2)
-    /// Space: O(N)
+    /// Space: O(1) but smashes input variable
     /// </summary>
     public void ReverseString(char[] s) {
         Stack<char> charStack = new Stack<char>();

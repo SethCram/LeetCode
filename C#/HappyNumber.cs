@@ -8,10 +8,10 @@
 public class HappyNumber
 {
     /// <summary>
-    /// 
-    /// Speed: O(M) (linear)
-    /// Space: O(M) where M = number of intermediate numbers till loop or 1 found
-    ///     could be O(1) if tortoise + hair alg used to find loop instead w/ 2 pntrs cross
+    /// Keep dictionary of all calc'd numbers bc if see one more than once, inf loop detected
+    /// Speed: O(M) (linear) where M = number of intermediate numbers till loop or 1 found
+    /// Space: O(1) bc hashmap uses constant space
+    ///     could avoid hashmap if tortoise + hair alg used to find loop w/ 2 pntrs cross
     /// </summary>
     /// <param name="n"></param>
     /// <returns></returns>
