@@ -21,36 +21,6 @@ namespace LeetCode
         }
 
 
-        /*
-        public int FailedQuickSearch(int[] nums, int target)
-        {
-            int halfwayIndex;
-            int halfwayInt;
-            int numsLength;
-            
-            while( nums != null )
-            {
-            numsLength = nums.Length;
-            halfwayIndex = numsLength / 2;
-            halfwayInt = nums[halfwayIndex];
-            
-            if( halfwayInt == target )
-            {
-                return halfwayIndex;
-            }
-            else if( halfwayInt > target )
-            {
-                //take lower half inclusive
-                nums = nums[0:halfwayInt];
-            }
-            else if( halfwayInt < target )
-            {
-                //take upper half inclusive
-                nums = nums[halfwayInt:numsLength];
-            }
-            
-            }
-        }
-        */
+        
     }
 }
